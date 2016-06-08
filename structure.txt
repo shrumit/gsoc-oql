@@ -1,0 +1,34 @@
+CNA (Copy Number Alterations)
+  CNA (Default: AMP and HOMDEL)
+  AMP (Amplified)
+  HOMDEL (Deep Deletion)
+  GAIN (Gained)
+  HETLOSS (Shallow Deletion)
+
+MUT (Mutations)
+  MUT (Default: all somatic, non-synonymous mutations)
+  MUT = <type>
+    MISSENSE
+    NONSENSE
+    NONSTART
+    NONSTOP
+    FRAMESHIFT
+    INFRAME
+    SPLIC
+    TRUNC
+  MUT = <specific>
+    {FETCH WITH AJAX}
+    
+EXP (mRNA expression level)
+  EXP (Default: at least 2 SD from mean)
+  < -x (Less than x SD below mean) 
+  <= -x (Less than or equal to x SD below mean) 
+  > +x (More than x SD above mean)
+  => +x (More than or equal to x SD above mean)
+
+PROT (Protein/phosphoprotein level)
+  PROT (Default: at least 2 SD from mean)
+  < -x (Less than x SD below mean) 
+  <= -x (Less than or equal to x SD below mean) 
+  > +x (More than x SD above mean)
+  => +x (More than or equal to x SD above mean)

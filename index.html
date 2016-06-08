@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--[if lt IE 9]> 
+    <script> document.createElement("desc"); </script>
+  <![endif]-->
+ 
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="http://cdn.rawgit.com/Codecademy/textarea-helper/master/textarea-helper.js"></script>
+
+<!--    <script type = "text/javascript" src = "../textarea-helper/textarea-helper.js"></script> 
+-->
+        
+    <style>
+      .hidden-menu {
+        display:none;
+        position:absolute;
+      }
+      
+      desc {
+        font-size: 80%;
+        display: block;
+        white-space: nowrap;
+      }
+      
+    </style>
+</head>
+<body>
+    <p>New OQL Editor Prototype</p>
+    <textarea rows="4" cols="50" placeholder="Type : to trigger menu"></textarea>
+
+    <ul class="hidden-menu" id="primary">
+       <li data-id="1">CNA<desc>Copy Number Alterations</desc>
+          <ul>
+             <li data-id="11" data-val="CNA">Default<desc>AMP and HOMDEL</desc></li>
+             <li data-id="12" data-val="AMP">AMP<desc>Amplified</desc></li>
+             <li data-id="13" data-val="HOMDEL">HOMDEL<desc>Deep Deletion</desc></li>
+             <li data-id="14" data-val="GAIN">GAIN<desc>Gained</desc></li>
+             <li data-id="15" data-val="HETLOSS">HETLOSS<desc>Shallow Deletion</desc></li>
+          </ul>
+       </li>
+    </ul>
+    
+    <ul class="hidden-menu" id="helper">
+      <li data-id="1">Add More Keywords</desc></li>
+      <li data-id="2">Finish</li>
+    </ul>
+    
+    
+</body>
+</html>
