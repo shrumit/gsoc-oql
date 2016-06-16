@@ -4,51 +4,62 @@
   <!--[if lt IE 9]> 
     <script> document.createElement("desc"); </script>
   <![endif]-->
- 
-    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://rawgit.com/shrumit/gsoc-oql/master/script.js"></script>
-    <script type="text/javascript" src="http://cdn.rawgit.com/Codecademy/textarea-helper/master/textarea-helper.js"></script>
+  <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
-<!--    <script type = "text/javascript" src = "../textarea-helper/textarea-helper.js"></script> 
--->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/shrumit/gsoc-oql/master/script.js"></script>
+  <script type="text/javascript" src="http://cdn.rawgit.com/Codecademy/textarea-helper/master/textarea-helper.js"></script>
         
-    <style>
-      .hidden-menu {
-        display:none;
-        position:absolute;
-      }
+  <style>
+    .hidden-menu {
+      display:none;
+      position:absolute;
+    }
       
-      desc {
-        font-size: 80%;
-        display: block;
-        white-space: nowrap;
-      }
-      
-    </style>
-</head>
-<body>
-    <p>New OQL Editor Prototype</p>
-    <textarea rows="4" cols="50" placeholder="Type : to trigger menu"></textarea>
+    desc {
+      font-size: 80%;
+      display: block;
+      white-space: nowrap;
+    }
 
-    <ul class="hidden-menu" id="primary">
-       <li data-id="1">CNA<desc>Copy Number Alterations</desc>
+  </style>
+</head>
+
+<body>
+
+  <!-- Handlebars.js template: Recursively generates OQL helper menu-->
+  <script id="oql-menu" type="text/handlebars-template">
+    {{#each items}}
+      <li data-id={{id}} data-val='{{val}}'>{{name}}<desc>{{desc}}</desc>
+        {{#if items}}
           <ul>
-             <li data-id="11" data-val="CNA">Default<desc>AMP and HOMDEL</desc></li>
-             <li data-id="12" data-val="AMP">AMP<desc>Amplified</desc></li>
-             <li data-id="13" data-val="HOMDEL">HOMDEL<desc>Deep Deletion</desc></li>
-             <li data-id="14" data-val="GAIN">GAIN<desc>Gained</desc></li>
-             <li data-id="15" data-val="HETLOSS">HETLOSS<desc>Shallow Deletion</desc></li>
+            {{> oql-menu}}
           </ul>
-       </li>
-    </ul>
+        {{/if}}
+      </li>
+    {{/each}}
+  </script>
     
-    <ul class="hidden-menu" id="helper">
-      <li data-id="1">Add More Keywords</desc></li>
-      <li data-id="2">Finish</li>
+  <!-- OQL Menu base -->
+  <script id="oql-menu-placeholder" type="text/handlebars-template">
+    <ul class="hidden-menu" id="primary">
+      {{> oql-menu}}
     </ul>
-    
+  </script>
+
+
+  <p>New OQL Editor Prototype</p>
+  <textarea rows="4" cols="50" placeholder="Type : to trigger menu"></textarea>
+  <section id="placeholder"></section>    
+      
+  <br>
+  
+  <input id="disable-helper" type="checkbox"></input>
+  <label for="disable-helper">Disable OQL Helper</label>
+  
+  <span id="oql-instruct" style="display:inline; color:grey;">Type : to launch OQL Helper</span>
     
 </body>
 </html>
