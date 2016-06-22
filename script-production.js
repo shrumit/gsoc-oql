@@ -13,12 +13,12 @@ var disabled = false; // OQL Helper disabled or not
 function censor(censor) {
   var i = 0;
   return function(key, value) {
-    if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) 
-      return '[Circular]'; 
+    if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value)
+      return '[Circular]';
     if(i >= 29)
       return '[Unknown]';
     ++i;
-    return value;  
+    return value;
   }
 }
 
@@ -83,13 +83,13 @@ function addText(text){
   $(TEXTAREA).val(getTextToAdd(" " + text));
   //if (text.slice(-1) == "x")
   //  $(TEXTAREA)[0].setSelectionRange(caretPos-1, caretPos);
-  //else 
+  //else
     $(TEXTAREA)[0].setSelectionRange(caretPos, caretPos);
 }
 
 function generateList() {
 
-  // 1st level of menu 
+  // 1st level of menu
   var items = [
     {id:"1", val:"", name: "CNA", desc:"Copy Number Alterations"},
     {id:"2", val:"", name: "MUT", desc:"Mutations"},
@@ -111,7 +111,7 @@ function generateList() {
     {id:"21", val:"MUT", name: "Default", desc:"All somatic nonsyn. mutations"},
     {id:"22", val:"", name: "Type", desc:""},
     {id:"23", val:"", name: "Specific", desc:""}
-  ] 
+  ]
 
   // 2nd level of EXP
   items[2].items = EXP_items = [
@@ -147,7 +147,7 @@ function generateList() {
   console.log(JSON.stringify(items[1].items[1].items))
 
   //TODO
-  // 3rd level MUT>Specific 
+  // 3rd level MUT>Specific
   items[1].items[2] = []
 
   
