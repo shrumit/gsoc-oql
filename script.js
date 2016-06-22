@@ -187,7 +187,9 @@ $(document).ready(function() {
 	$(MENU).menu({
 		select: function(event, ui) {
 			if (ui.item.attr("data-val") !== "") {
+				removeMenu(MENU);
 				addText(" " + ui.item.attr("data-val"));
+				showMenu(MENU);
 			}
 		}
 	});
