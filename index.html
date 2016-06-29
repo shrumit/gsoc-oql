@@ -12,7 +12,9 @@
   <script type="text/javascript" src="https://rawgit.com/shrumit/gsoc-oql/master/script.js"></script>
   <!-- <script type="text/javascript" src="script.js"></script> -->
   <script type="text/javascript" src="https://cdn.rawgit.com/shrumit/textarea-helper/master/textarea-helper.js"></script>
-
+  <!-- <script type="text/javascript" src="textarea-plus.js"></script> -->
+  <script type="text/javascript" src="https://cdn.rawgit.com/shrumit/textarea-plus/master/textarea-plus.js"></script>
+  
   <style>
     .hidden-menu {
       display:none;
@@ -20,7 +22,7 @@
 	  opacity: 0.7;
     }
 	
-	.hidden-menu:hover {
+	.hidden-menu:hover{
 		opacity: 1;
 	}
 
@@ -35,41 +37,28 @@
 
 <body>
 
-  <!-- Handlebars.js template: Recursively generates OQL helper menu-->
-  <script id="oql-menu" type="text/handlebars-template">
+  <!-- Handlebars.js template: Recursively generates OQL menu from object-->
+  <script id="oql-menu-template" type="text/handlebars-template">
     {{#each items}}
       <li data-val='{{val}}'>{{name}}<desc>{{desc}}</desc>
         {{#if items}}
           <ul>
-            {{> oql-menu}}
+            {{> oql-menu-template}}
           </ul>
         {{/if}}
       </li>
     {{/each}}
   </script>
-  <!-- Handlebars.js template: Recursively generates OQL helper menu-->
-  <!-- <script id="oql-menu" type="text/handlebars-template">
-    {{#each items}}
-      <li data-id={{id}} data-val='{{val}}'>{{name}}<desc>{{desc}}</desc>
-        {{#if items}}
-          <ul>
-            {{> oql-menu}}
-          </ul>
-        {{/if}}
-      </li>
-    {{/each}}
-  </script> -->
 
   <!-- OQL Menu base -->
   <script id="oql-menu-placeholder" type="text/handlebars-template">
-    <ul class="hidden-menu" id="primary">
-      {{> oql-menu}}
+    <ul class="hidden-menu" id="oql-menu">
+      {{> oql-menu-template}}
     </ul>
   </script>
 
-
   <p>New OQL Editor Prototype</p>
-  <textarea rows="4" cols="50" placeholder="Type : to trigger menu"></textarea>
+  <textarea rows="4" cols="50" placeholder="Type : to trigger menu" id="gene_list"></textarea>
   <section id="placeholder"></section>
 
   <br>
