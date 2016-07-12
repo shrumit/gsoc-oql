@@ -6,6 +6,7 @@ $(document).ready(function() {
 	const ESCAPE_CHAR = 27;
 	const UP_CHAR = 38;
 	const DOWN_CHAR = 40;
+	const ENTER_CHAR = 13;
 	const LINE_FEED = '&#10;';
 	
 	const disabled = false; // OQL Helper disabled flag
@@ -34,9 +35,10 @@ $(document).ready(function() {
 			return;
 		
 		// User typed :
-		if (event.keyCode == COLON_CHAR) {
+		if (event.which == COLON_CHAR) {
 			var text = $TA.val();
 			var cur = $TA.getCaretIndex();
+			console.log('keypress');
 			
 			//remove space before :
 			var t = text.substring(0, cur);
@@ -48,24 +50,24 @@ $(document).ready(function() {
 			text = $TA.val();
 			cur = $TA.getCaretIndex();
 
-			curLine = $TA.getLineBefore();
+			curLine = $TA.getLine(null, {getBeforeOnly: true});
+			// move gene symbol to new line if other symbol before it on line
 			re = /^(\w+[ \t]+)+(\w+)$/
 			ar = re.exec(curLine);
-			
 			if (ar){
 				console.log(ar[2].length)
 				$TA.val(text.substring(0, cur-ar[2].length) + text.substring(cur, text.length) + '\n' + ar[2]);
 			} else {
-				re = /([ \t]+\w+)+/
-				curLine = $TA.getLineAfter();
+			// put \n in front of gene symbol if genes in front of it
+				re = /(([ \t]+)\w+)+/
+				curLine = $TA.getLine(null, {getAfterOnly: true});
 				console.log("else" + curLine + re);
 				ar = re.exec(curLine);
 				console.log(ar);
 				if (ar){
-					$TA.insert('\n', cur+1, {cursorAtOriginal: true});
+					$TA.insert('\n', cur + ar[2].length, {caretAtOriginal: true});
 				}
 			}
-						
 			showMenu();
 		}
 	});
@@ -74,12 +76,14 @@ $(document).ready(function() {
 	
 	// Remove menu on backspace/escape
 	$TA.on('keyup', function(event) {
-		if (event.keyCode == BACKSPACE_CHAR || event.keyCode == ESCAPE_CHAR) {
-			$ME.css('display', 'none');
-		}
-		else if (event.keyCode == UP_CHAR || event.keyCode == DOWN_CHAR) {
-			removeMenu();
-			showMenu();
+		if ($ME.css('display') !== 'none') {
+			if (event.which === BACKSPACE_CHAR || event.which === ESCAPE_CHAR) {
+				$ME.css('display', 'none');
+			}
+			else if (event.which === UP_CHAR || event.which === DOWN_CHAR || event.which === ENTER_CHAR) {
+				removeMenu();
+				showMenu();
+			}
 		}
 	});
 
